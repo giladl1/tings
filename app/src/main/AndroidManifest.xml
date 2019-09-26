@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="paydate.com.paydate">
+    package="Tings.com.tings">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,11 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SpecificPurchaseActivity"
+            android:name="Tings.com.tings.SpecificPurchaseActivity"
             android:label="@string/title_activity_specific_purchase"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".MyPurchasesActivity"
+            android:name="Tings.com.tings.MyPurchasesActivity"
             android:label="@string/title_activity_my_purchases"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
@@ -29,7 +29,7 @@
         <!--<activity android:name=".MainActivity">-->
             <!---->
         <!--</activity>-->
-        <activity android:name=".PurchaseActivity"
+        <activity android:name="Tings.com.tings.PurchaseActivity"
             android:label="@string/title_activity_purchase_activity"/>
     </application>
 

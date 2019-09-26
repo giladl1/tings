@@ -1,23 +1,15 @@
-package paydate.com.paydate.DialogFragment
-import android.content.ContentValues
+package Tings.com.tings.DialogFragment
 //import javafx.scene.layout.GridPane.getColumnIndex
 
-import android.content.DialogInterface
 import android.os.Bundle
-import android.R.string.cancel
-import android.app.AlertDialog
-import android.app.Dialog
-import android.content.Context
 import android.view.LayoutInflater
-import android.database.sqlite.SQLiteDatabase
 import android.view.View
 import androidx.fragment.app.DialogFragment
 import android.view.ViewGroup
 import android.widget.*
-import com.google.common.collect.Iterables
 import kotlinx.android.synthetic.main.dialog_pay_back.*
-import paydate.com.paydate.R
-import paydate.com.paydate.SpecificPurchaseActivity
+import Tings.com.tings.R
+import Tings.com.tings.SpecificPurchaseActivity
 
 class PaybackDialogFragment : DialogFragment() {
 

@@ -1,4 +1,4 @@
-package paydate.com.paydate
+package Tings.com.tings
 
 import android.Manifest
 import android.content.Intent
@@ -15,9 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 
 import kotlinx.android.synthetic.main.activity_my_purchases.*
-import kotlinx.android.synthetic.main.content_my_purchases.*
 import layout.RecyclerAdapter
-import paydate.com.paydate.firebaseClasses.Payment
+import Tings.com.tings.firebaseClasses.Payment
 
 class MyPurchasesActivity : AppCompatActivity() {
     val MY_PERMISSIONS_REQUEST_INTERNET=1

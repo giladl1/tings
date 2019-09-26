@@ -1,4 +1,4 @@
-package paydate.com.paydate
+package Tings.com.tings
 
 import org.junit.Test
 

@@ -1,7 +1,6 @@
-package paydate.com.paydate
+package Tings.com.tings
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,8 +13,6 @@ import androidx.core.content.ContextCompat
 //import com.google.firebase.database.IgnoreExtraProperties
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.Period
 import java.util.*
 
 class PurchaseActivity : AppCompatActivity() {

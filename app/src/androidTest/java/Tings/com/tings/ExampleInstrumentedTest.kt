@@ -1,8 +1,7 @@
-package paydate.com.paydate
+package Tings.com.tings
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
-import paydate.com.paydate.PurchaseActivity
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -19,7 +18,7 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("paydate.com.paydate", appContext.packageName)
+        assertEquals("Tings.com.Tings", appContext.packageName)
     }
     @Test
     fun checkCurrentDate() {

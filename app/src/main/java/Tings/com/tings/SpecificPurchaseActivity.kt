@@ -1,7 +1,6 @@
-package paydate.com.paydate
+package Tings.com.tings
 
 import android.os.Bundle
-import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,8 +12,7 @@ import android.content.Intent
 import android.view.View
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import com.google.firebase.firestore.model.value.IntegerValue
-import paydate.com.paydate.DialogFragment.PaybackDialogFragment
+import Tings.com.tings.DialogFragment.PaybackDialogFragment
 
 
 class SpecificPurchaseActivity : AppCompatActivity() {

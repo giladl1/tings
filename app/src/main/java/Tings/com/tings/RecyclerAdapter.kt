@@ -6,15 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.recyclerview_item_row.view.*
-import paydate.com.paydate.PurchaseActivity
-import paydate.com.paydate.R
-import paydate.com.paydate.SpecificPurchaseActivity
-import paydate.com.paydate.firebaseClasses.Payment
-import paydate.com.paydate.inflate
+import Tings.com.tings.R
+import Tings.com.tings.SpecificPurchaseActivity
+import Tings.com.tings.firebaseClasses.Payment
 
 
 class RecyclerAdapter(private val myDataset: MutableList<Payment>,public val myDatasetIds: MutableList<String> ) ://Array<String>

@@ -1,6 +1,4 @@
-package paydate.com.paydate.firebaseClasses
-
-import android.provider.ContactsContract
+package Tings.com.tings.firebaseClasses
 
 data class Payment(
         val business_id: String? = null,

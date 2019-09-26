@@ -1,17 +1,9 @@
-package paydate.com.paydate
+package Tings.com.tings
 
-import android.Manifest
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.google.firebase.firestore.FirebaseFirestore
-import paydate.com.paydate.R.layout.activity_purchase
 
 class MainActivity : AppCompatActivity() {
 
