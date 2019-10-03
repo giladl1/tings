@@ -1,86 +1,35 @@
 package Tings.com.tings
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity;
 
 import kotlinx.android.synthetic.main.activity_specific_purchase.*
 import kotlinx.android.synthetic.main.content_specific_purchase.*
 
-//import javafx.scene.Cursor.cursor
-import android.content.Intent
-import android.view.View
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
-import Tings.com.tings.DialogFragment.PaybackDialogFragment
-
-
 class SpecificPurchaseActivity : AppCompatActivity() {
-    var pbdf = PaybackDialogFragment()
-    var paymentId:String=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_specific_purchase)
+        Log.v("specificpurchase","passed")
+
         setSupportActionBar(toolbar)
-        paymentId= intent.getStringExtra("paymentId")
-        val totalSum:String = intent.getStringExtra("totalSum")
-        val business_id:String = intent.getStringExtra("business_id")
-        val sharedAmount:String = intent.getStringExtra("sharedAmount")
+        var title:String= intent.getStringExtra("title")
+        val image:String = intent.getStringExtra("image")
+        val rating:String = intent.getStringExtra("rating")
+        val releaseYear:String = intent.getStringExtra("releaseYear")
 
-        val date:String = intent.getStringExtra("date")
-        val endDate:String = intent.getStringExtra("endDate")
-        val partner:String = intent.getStringExtra("partner")
-        val status:String = intent.getStringExtra("status")
+        val genre0:String = intent.getStringExtra("genre0")
+        val genre1:String = intent.getStringExtra("genre1")
+        val genre2:String = intent.getStringExtra("genre2")
 
-        textViewTotalPrice.text="Total Sum: " + totalSum
-        textViewDate.text= date
-        textViewEndDate.text="End Date: " + endDate
-        textViewBusiness.text= business_id
-        textViewPartner.text= partner
-        textViewStatus.text="Status: " + status
-        if(sharedAmount.equals(""))
-            textViewPaybackSum.text=textViewPaybackSum.text.toString()+" 0"
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-
-//        show_dialog_frag()
-    }
-
-    fun show_dialog_frag(view: View) {
-//        pbdf = PaybackDialogFragment()
-        val args = Bundle()
-//        args.putString("count_id", count_id)
-//        args.putString("name", count_name)
-        pbdf.setArguments(args)
-        pbdf.show(supportFragmentManager, "counts")//fragmentManager
-    }
-    override fun onActivityResult(requestCode: Int, resultCode: Int,
-                                  data: Intent?) {
-        if(data!=null) {
-            var stam: Int = 8
-        }
+        textViewTotalPrice.text="title: " + title
+        textViewDate.text= "image: " +image
+        textViewEndDate.text="rating: " + rating
+        textViewBusiness.text="release year: " + releaseYear
+        textViewPartner.text= "genres: " +genre0
 
     }
-    fun cancelDialog(){
-        pbdf.dismiss()
-    }
-    fun applyDialog(sharedsum: String,organization: String ){
-        textViewPaybackSum.text ="Payback Sum: " + sharedsum.toString() +
-                " payed to: "+organization
-//        editButton.isClickable=false
-        pbdf.dismiss()
-        updateTransaction(sharedsum,organization)
-    }
 
-    private fun updateTransaction(sharedsum: String, organization: String) {
-        val data = hashMapOf("donateOrganization" to organization,"sharedAmount" to sharedsum)
-        val db = FirebaseFirestore.getInstance()
-        db.collection("payments").document(paymentId)
-                .set(data, SetOptions.merge())
-
-    }
 
 }

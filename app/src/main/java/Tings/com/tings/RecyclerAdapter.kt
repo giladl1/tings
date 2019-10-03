@@ -11,23 +11,24 @@ import androidx.recyclerview.widget.RecyclerView
 import Tings.com.tings.R
 import Tings.com.tings.SpecificPurchaseActivity
 import Tings.com.tings.firebaseClasses.Payment
+import Tings.com.tings.room.Movies
 
 
-class RecyclerAdapter(private val myDataset: MutableList<Payment>,public val myDatasetIds: MutableList<String> ) ://Array<String>
+class RecyclerAdapter(private val myDataset: MutableList<Movies> ) ://Array<String>//
         RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder.
     // Each data item is just a string in this case that is shown in a TextView.
-    class MyViewHolder(val v: View,val context: Context,myDatasetIds: MutableList<String>) : RecyclerView.ViewHolder(v) {
+    class MyViewHolder(val v: View,val context: Context) : RecyclerView.ViewHolder(v) {
         val textView: TextView
         val textView2: TextView
         val textView3: TextView
         val textView4: TextView
         val textView5: TextView
         val textView6: TextView
-        val textView7: TextView
+//        val textView7: TextView
 
         init {
             // Define click listener for the ViewHolder's View.
@@ -37,19 +38,19 @@ class RecyclerAdapter(private val myDataset: MutableList<Payment>,public val myD
             textView4 = v.findViewById(R.id.textView4)
             textView5 = v.findViewById(R.id.textView5)
             textView6 = v.findViewById(R.id.textView6)
-            textView7 = v.findViewById(R.id.textView7)
+//            textView7 = v.findViewById(R.id.textView7)
             v.setOnClickListener {
                 Log.d("RecyclerAdapter", "Element $adapterPosition clicked.")
                 val intent = Intent(context, SpecificPurchaseActivity::class.java)
-                intent.putExtra("paymentId",myDatasetIds[adapterPosition])//textViewNotVisible.text)
-                intent.putExtra("totalSum",textView4.text)
-                intent.putExtra("business_id",textView.text)
-                intent.putExtra("sharedAmount",textView5.text)
+                intent.putExtra("title",textView.text)//textViewNotVisible.text)
+                intent.putExtra("image",textView4.text)
+                intent.putExtra("rating",textView2.text)
+                intent.putExtra("releaseYear",textView3.text)
 
-                intent.putExtra("date",textView2.text)
-                intent.putExtra("endDate",textView3.text)
-                intent.putExtra("partner",textView6.text)//not set yet
-                intent.putExtra("status",textView7.text)
+                intent.putExtra("genre0",textView2.text)
+                intent.putExtra("genre1",textView3.text)
+                intent.putExtra("genre2",textView3.text)//not set yet
+//                intent.putExtra("status",textView7.text)
 
                 context.startActivity(intent)
 
@@ -65,7 +66,7 @@ class RecyclerAdapter(private val myDataset: MutableList<Payment>,public val myD
                 .inflate(R.layout.recyclerview_item_row, parent, false) //as TextView
         // set the view's size, margins, paddings and layout parameters
 
-        return MyViewHolder(textView,parent.context,myDatasetIds)
+        return MyViewHolder(textView,parent.context)//,myDatasetIds
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -73,13 +74,13 @@ class RecyclerAdapter(private val myDataset: MutableList<Payment>,public val myD
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
-        holder.textView.text = myDataset[position].business_id
-        holder.textView2.text = myDataset[position].date
-        holder.textView3.text = myDataset[position].endDate
-        holder.textView4.text = myDataset[position].totalSum
-        holder.textView5.text = myDataset[position].sharedAmount.toString()
-        holder.textView6.text = myDataset[position].sharing_user_id
-        holder.textView7.text = myDataset[position].status
+        holder.textView.text = myDataset[position].title
+        holder.textView2.text = myDataset[position].rating
+        holder.textView3.text = myDataset[position].relaseYear
+        holder.textView4.text = myDataset[position].image
+//        holder.textView5.text = myDataset[position].sharedAmount.toString()
+//        holder.textView6.text = myDataset[position].sharing_user_id
+//        holder.textView7.text = myDataset[position].status
 
     }
 

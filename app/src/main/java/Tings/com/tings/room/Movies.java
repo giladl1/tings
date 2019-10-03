@@ -1,45 +1,62 @@
 package Tings.com.tings.room;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 /**
  * Created by giladl1 on 5/13/2018.
  */
 @Entity
-public class Samples {
+public class Movies {
     @NonNull
     @PrimaryKey
-    private String sampleId;
-    private String sampleName;
-    private String sampleTime;
-    private String sampleLat;
-    private String sampleLong;
-    private String sampleSpeed;
+    private String title;
+    private String image;
+    private String rating;
+    private String relaseYear;
+//    private Genre[] genres;
+//    private String movieId;
+//    private String movieName;
+//    private String movieTime;
+//    private String movieLat;
+//    private String movieLong;
+//    private String movieSpeed;
 
-    public Samples() {
+    public Movies() {
     }
 
-    public String getSampleId() { return sampleId; }
-    public void setSampleId(String sampleId) { this.sampleId = sampleId; }
-    public String getSampleName() { return sampleName; }
-    public void setSampleName (String sampleName) { this.sampleName = sampleName; }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+    public String getImage() { return image; }
+    public void setImage (String image) { this.image = image; }
 
-    public String getSampleTime() { return sampleTime; }
-    public void setSampleTime(String sampleTime) {
-        this.sampleTime = sampleTime;
+    public String getRating() { return rating; }
+    public void setRating(String rating) {
+        this.rating = rating;
     }
-    public String getSampleLat() { return sampleLat; }
-    public void setSampleLat(String sampleLat) {
-        this.sampleLat = sampleLat;
+    public String getRelaseYear() { return relaseYear; }
+    public void setRelaseYear(String relaseYear) {
+        this.relaseYear = relaseYear;
     }
-    public String getSampleLong() { return sampleLong; }
-    public void setSampleLong(String sampleLong) {
-        this.sampleLong = sampleLong;
-    }
-    public String getSampleSpeed() { return sampleSpeed; }
-    public void setSampleSpeed(String sampleSpeed) {
-        this.sampleSpeed = sampleSpeed;
-    }
+//    public Genre[] getGenres() { return genres; }
+//    public void setGenres(Genre[] genres) {
+//        this.genres = genres;
+//    }//todo check it
+
+//    public String getMovieSpeed() { return movieSpeed; }
+//    public void setMovieSpeed(String movieSpeed) {
+//        this.movieSpeed = movieSpeed;
+//    }
+    public class Genre{
+        int genreId;
+        String genreTitle;
+        public Genre(int genreId,String genreTitle){
+            this.genreId=genreId;
+            this.genreTitle=genreTitle;
+        }
+
+
 }
+}
+

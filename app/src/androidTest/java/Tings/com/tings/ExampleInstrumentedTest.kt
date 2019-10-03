@@ -18,7 +18,7 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("Tings.com.Tings", appContext.packageName)
+        assertEquals("Tings.com.tings", appContext.packageName)
     }
     @Test
     fun checkCurrentDate() {

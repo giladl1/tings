@@ -3,11 +3,15 @@ package Tings.com.tings.room
 import android.app.IntentService
 import android.content.Intent
 import android.content.Context
+import androidx.room.Room
 
 // TODO: Rename actions, choose action names that describe tasks that this
 // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
 private const val ACTION_FOO = "Tings.com.tings.room.action.FOO"
 private const val ACTION_BAZ = "Tings.com.tings.room.action.BAZ"
+
+val DATABASE_NAME: String = "movies"
+private var movieDatabase: MovieDatabase? = null
 
 // TODO: Rename parameters
 private const val EXTRA_PARAM1 = "Tings.com.tings.room.extra.PARAM1"
@@ -22,18 +26,32 @@ private const val EXTRA_PARAM2 = "Tings.com.tings.room.extra.PARAM2"
 class MyInsertService : IntentService("MyInsertService") {
 
     override fun onHandleIntent(intent: Intent?) {
-        when (intent?.action) {
-            ACTION_FOO -> {
-                val param1 = intent.getStringExtra(EXTRA_PARAM1)
-                val param2 = intent.getStringExtra(EXTRA_PARAM2)
-                handleActionFoo(param1, param2)
-            }
-            ACTION_BAZ -> {
-                val param1 = intent.getStringExtra(EXTRA_PARAM1)
-                val param2 = intent.getStringExtra(EXTRA_PARAM2)
-                handleActionBaz(param1, param2)
-            }
-        }
+        movieDatabase = Room.databaseBuilder(this,
+                MovieDatabase::class.java, DATABASE_NAME)
+                .fallbackToDestructiveMigration()
+                .build()
+
+        var movie: Movies = Movies()
+        movie.setTitle("211")
+        movie.setImage("999")
+        movie.setRating("777")
+        movie.setRelaseYear("333")
+//        val genreSet: Movies.Genre=Movies.Genre() Genre("0","drama")
+//        val genreSet= arrayOf Movies.Genre("0","drama")
+
+        movieDatabase!!.daoAccess().insertOnlySingleMovie(movie)
+//        when (intent?.action) {
+//            ACTION_FOO -> {
+//                val param1 = intent.getStringExtra(EXTRA_PARAM1)
+//                val param2 = intent.getStringExtra(EXTRA_PARAM2)
+//                handleActionFoo(param1, param2)
+//            }
+//            ACTION_BAZ -> {
+//                val param1 = intent.getStringExtra(EXTRA_PARAM1)
+//                val param2 = intent.getStringExtra(EXTRA_PARAM2)
+//                handleActionBaz(param1, param2)
+//            }
+//        }
     }
 
     /**
