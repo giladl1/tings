@@ -75,8 +75,8 @@ class RecyclerAdapter(private val myDataset: MutableList<Movies> ) ://Array<Stri
         // - replace the contents of the view with that element
 
         holder.textView.text = myDataset[position].title
-        holder.textView2.text = myDataset[position].rating
-        holder.textView3.text = myDataset[position].relaseYear
+        holder.textView2.text = myDataset[position].rating.toString()
+        holder.textView3.text = myDataset[position].relaseYear.toString()
         holder.textView4.text = myDataset[position].image
 //        holder.textView5.text = myDataset[position].sharedAmount.toString()
 //        holder.textView6.text = myDataset[position].sharing_user_id

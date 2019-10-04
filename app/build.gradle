@@ -45,9 +45,11 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersion"
 
     implementation 'com.github.kittinunf.fuel:fuel-android:1.15.1'
+
+    implementation 'com.beust:klaxon:5.0.1'
     //moshi:
 //    implementation 'com.squareup.moshi:moshi:1.8.0'
-    implementation("com.squareup.moshi:moshi-kotlin:1.8.0")
+//    implementation("com.squareup.moshi:moshi-kotlin:1.8.0")
 //    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.8.0'
 }
 apply plugin: 'com.google.gms.google-services'

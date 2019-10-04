@@ -34,12 +34,13 @@ class MyInsertService : IntentService("MyInsertService") {
         var movie: Movies = Movies()
         movie.setTitle("211")
         movie.setImage("999")
-        movie.setRating("777")
-        movie.setRelaseYear("333")
+        movie.setRating(777.0)
+        movie.setRelaseYear(333)
 //        val genreSet: Movies.Genre=Movies.Genre() Genre("0","drama")
 //        val genreSet= arrayOf Movies.Genre("0","drama")
 
-        movieDatabase!!.daoAccess().insertOnlySingleMovie(movie)
+        //todo return it :
+        //movieDatabase!!.daoAccess().insertOnlySingleMovie(movie)
 //        when (intent?.action) {
 //            ACTION_FOO -> {
 //                val param1 = intent.getStringExtra(EXTRA_PARAM1)

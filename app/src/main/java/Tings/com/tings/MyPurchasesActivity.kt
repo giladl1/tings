@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat
@@ -16,34 +15,26 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_my_purchases.*
 import layout.RecyclerAdapter
 import Tings.com.tings.firebaseClasses.Payment
-import Tings.com.tings.json.MoviesJson
 import Tings.com.tings.room.*
 import android.content.*
 import android.os.AsyncTask
 import androidx.room.Room
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.android.extension.responseJson
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-import com.squareup.moshi.Moshi
+//import com.squareup.moshi.Json
+//import com.squareup.moshi.JsonClass
+//import com.squareup.moshi.Moshi
 //import com.google.gson.annotations.JsonAdapter
 //import retrofit2.Retrofit
 //import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 //import retrofit2.Retrofit
 //import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 //import retrofit2.converter.gson.GsonConverterFactory
-import java.net.URL
 
-import android.widget.TextView
-import android.widget.Toast
 import android.os.Handler
 import android.os.IBinder
-import android.widget.LinearLayout
-import androidx.lifecycle.LiveData
 import kotlinx.coroutines.*
 import java.lang.Runnable
-import java.lang.ref.WeakReference
-import kotlin.coroutines.CoroutineContext
 
 
 class MyPurchasesActivity : AppCompatActivity() {
@@ -86,10 +77,6 @@ class MyPurchasesActivity : AppCompatActivity() {
 
 
 
-        //$$$$$$$$$$$$$$$$$$$$$$$$$$
-//        getMoviesFromRoom()
-//        val intent = Intent(this, MySelectService::class.java)
-//        startService(intent)
         var movieDatabase:MovieDatabase=
                 Room.databaseBuilder(this,
                         MovieDatabase::class.java, "movies")
@@ -122,8 +109,8 @@ class MyPurchasesActivity : AppCompatActivity() {
 //        mHandler = Handler()
 
 
-//        val intent = Intent(this, MySelectService::class.java)
-//        startService(intent)
+        val intent = Intent(this, MyInsertService::class.java)
+        startService(intent)
 
 //        insertMovieToRoom()
 //        getMovieFromRoom()
@@ -255,13 +242,13 @@ class MyPurchasesActivity : AppCompatActivity() {
         }
     }
 
-    private fun onTaskCompleted(json: String) {
-        println(json)
-        val moshi = Moshi.Builder().build()
-        val jsonAdapter = moshi.adapter(MoviesJson::class.java)
-        val movie = jsonAdapter.fromJson(json)
-        println(movie)
-    }
+//    private fun onTaskCompleted(json: String) {
+//        println(json)
+//        val moshi = Moshi.Builder().build()
+//        val jsonAdapter = moshi.adapter(MoviesJson::class.java)
+//        val movie = jsonAdapter.fromJson(json)
+//        println(movie)
+//    }
     private val myConnection = object : ServiceConnection {
         override fun onServiceConnected(className: ComponentName,
                                         service: IBinder) {

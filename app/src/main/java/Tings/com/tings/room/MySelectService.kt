@@ -41,27 +41,5 @@ class MySelectService() : IntentService("MySelectService") {
                         .fallbackToDestructiveMigration()
                         .build()
                 val movies = movieDatabase!!.daoAccess().getMovies()//fetchOneMoviesbyMovieTitle("448")
-//        var moviesInArr:List<Movies>=arrayListOf(movies)
-//        val myServiceCallbacks:Tings.com.tings.room.ServiceCallbacks
-//        val BROADCAST_ACTION = "com.mukesh.service"
-//        val intent = Intent(BROADCAST_ACTION);
-//        intent.putExtra("time", movies)
-//        intent.putExtra("counter", String.valueOf(counter))
-//        sendBroadcast(intent)
-    }
-    /**
-     * Handle action Foo in the provided background thread with the provided
-     * parameters.
-     */
-    private fun handleActionFoo(param1: String, param2: String) {
-        TODO("Handle action Foo")
-    }
-
-    /**
-     * Handle action Baz in the provided background thread with the provided
-     * parameters.
-     */
-    private fun handleActionBaz(param1: String, param2: String) {
-        TODO("Handle action Baz")
     }
 }

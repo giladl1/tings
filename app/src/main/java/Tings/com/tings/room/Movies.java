@@ -13,8 +13,8 @@ public class Movies {
     @PrimaryKey
     private String title;
     private String image;
-    private String rating;
-    private String relaseYear;
+    private Double rating;
+    private Integer relaseYear;
 //    private Genre[] genres;
 //    private String movieId;
 //    private String movieName;
@@ -24,6 +24,11 @@ public class Movies {
 //    private String movieSpeed;
 
     public Movies() {
+        title=null;
+        image=null;
+        rating=null;
+        relaseYear=null;
+
     }
 
     public String getTitle() { return title; }
@@ -31,32 +36,32 @@ public class Movies {
     public String getImage() { return image; }
     public void setImage (String image) { this.image = image; }
 
-    public String getRating() { return rating; }
-    public void setRating(String rating) {
+    public Double getRating() { return rating; }
+    public void setRating(Double rating) {
         this.rating = rating;
     }
-    public String getRelaseYear() { return relaseYear; }
-    public void setRelaseYear(String relaseYear) {
+    public Integer getRelaseYear() { return relaseYear; }
+    public void setRelaseYear(Integer relaseYear) {
         this.relaseYear = relaseYear;
     }
 //    public Genre[] getGenres() { return genres; }
 //    public void setGenres(Genre[] genres) {
 //        this.genres = genres;
-//    }//todo check it
+    }//todo check it
 
 //    public String getMovieSpeed() { return movieSpeed; }
 //    public void setMovieSpeed(String movieSpeed) {
 //        this.movieSpeed = movieSpeed;
 //    }
-    public class Genre{
-        int genreId;
+    class Genre{
+//        int genreId;
         String genreTitle;
-        public Genre(int genreId,String genreTitle){
-            this.genreId=genreId;
+        public Genre(String genreTitle){
+//            this.genreId=genreId;
             this.genreTitle=genreTitle;
         }
 
 
 }
-}
+//}
 

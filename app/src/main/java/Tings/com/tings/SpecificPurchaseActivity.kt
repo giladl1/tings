@@ -11,7 +11,7 @@ class SpecificPurchaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_specific_purchase)
-        Log.v("specificpurchase","passed")
+
 
         setSupportActionBar(toolbar)
         var title:String= intent.getStringExtra("title")

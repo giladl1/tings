@@ -1,18 +1,24 @@
 package Tings.com.tings.json
-
+import android.Manifest
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
 import Tings.com.tings.R
+import Tings.com.tings.room.MovieDatabase
+import Tings.com.tings.room.Movies
 import android.graphics.Movie
 import android.util.Log
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.Room
+import com.beust.klaxon.JsonReader
+import com.beust.klaxon.Klaxon
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.android.extension.responseJson
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-
 import kotlinx.android.synthetic.main.activity_get_json.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.io.StringReader
 
 class GetJsonActivity : AppCompatActivity() {
     lateinit var URL:String
@@ -21,17 +27,11 @@ class GetJsonActivity : AppCompatActivity() {
         setContentView(R.layout.activity_get_json)
         setSupportActionBar(toolbar)
         URL ="http://api.androidhive.info/json/movies.json"
-        stam()
-//        sampleKo()
+        getJsonFromUrl()
 
 
     }
-    private fun stam(){
-        val avi:String="avi"
-    }
-    private fun sampleKo() {
-        //https://github.com/androidmads/KotlinFuelHttpSample/blob/master/app/src/main/java/com/androidmads/kotlinfuelhttpsample/MainActivity.kt
-        //https://github.com/kittinunf/Fuel/blob/1.16.0/README.md
+    private fun getJsonFromUrl() {
         try {
 
             Fuel.post(URL, listOf()).responseJson { request, response, result ->
@@ -46,10 +46,83 @@ class GetJsonActivity : AppCompatActivity() {
     }
     private fun onTaskCompleted(json: String) {
         println(json)
-        val moshi = Moshi.Builder().build()
-        val jsonAdapter = moshi.adapter(MoviesJson::class.java)
-        val movie = jsonAdapter.fromJson(json)
-        println(movie)
+//        val result = Klaxon()
+//                .parse<Movies>("""
+//
+//                {
+//                    "title" : "title"
+//                    "image" : "wwww.sss"
+//                    "rating" : 88
+//                    "name" : "John Smith",
+//                }
+//        """)
+        //here we parse the json into movies and then into an array of movies
+        val klaxon = Klaxon()
+        val moviesArray = arrayListOf<movie>()
+        JsonReader(StringReader(json)).use {//jsonArray
+            reader -> reader.beginArray {
+            while (reader.hasNext()) {
+                val curMovie = klaxon.parse<movie>(reader)
+                moviesArray.add(curMovie!!)
+            }
+        }
+        }
+        Log.v("klaxon","passed")
+        if(moviesArray==null || moviesArray.size==0)
+            Log.v("moviesArr"," is null")
+        insertMoviesToRoom(moviesArray)
+
+
+//        Log.v("now","the time")
+//        println("rasa is : "+result?.rating.toString())
+
+
+        var data= mutableListOf<Movies>()//todo transform from json to room
+
+//        println("res is: " + (result?.get(0)?.image ))
+
+    }
+    //here we will insert the parsed json into the room db:
+    fun insertMoviesToRoom( jsonMovies:List<movie>){
+        GlobalScope.launch {
+        var movieDatabase: MovieDatabase =
+                Room.databaseBuilder(applicationContext,
+                        MovieDatabase::class.java, "movies")
+                        .fallbackToDestructiveMigration().allowMainThreadQueries()
+                        .build()
+        Log.v("insertMoviesToRoom","passed")
+
+//            movieDatabase.daoAccess().getMovies()
+
+            jsonMovies?.forEach {
+                Log.v("before println it","passed")
+//                println(it)
+                var myMovie= mov(it.title,it.image,it.rating,it.releaseYear)//Movies()
+                Log.v("before it title","passed")
+//                myMovie.setTitle(it.title)
+//                Log.v("before it image","passed")
+//                myMovie.setImage(it.image)
+//                Log.v("before it rating","passed")
+//                myMovie.setRating(it.rating)
+//                myMovie.setRelaseYear(it.releaseYear)
+
+                movieDatabase.daoAccess().insertOnlySingleMovie(myMovie)//todo one movie here
+                Log.v("insertToRoom",it.title)
+//                insertGenresToRoom(title,List<Genres>)
+                }
+        }
+
     }
 
 }
+//we use this class to parse the json to seperate movies:
+class movie(val title:String,val image:String,val rating:Double,val releaseYear:Int,val genre:List<String>)
+
+@Entity
+data class mov(
+        @PrimaryKey val title: String,
+        @ColumnInfo val image: String,
+        @ColumnInfo val rating: Double,
+        @ColumnInfo val releaseYear: Int
+)
+
