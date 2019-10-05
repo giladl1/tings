@@ -16,6 +16,7 @@ import com.beust.klaxon.Klaxon
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.android.extension.responseJson
 import kotlinx.android.synthetic.main.activity_get_json.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.StringReader
@@ -58,11 +59,11 @@ class GetJsonActivity : AppCompatActivity() {
 //        """)
         //here we parse the json into movies and then into an array of movies
         val klaxon = Klaxon()
-        val moviesArray = arrayListOf<movie>()
+        val moviesArray = arrayListOf<mov>()
         JsonReader(StringReader(json)).use {//jsonArray
             reader -> reader.beginArray {
             while (reader.hasNext()) {
-                val curMovie = klaxon.parse<movie>(reader)
+                val curMovie = klaxon.parse<mov>(reader)
                 moviesArray.add(curMovie!!)
             }
         }
@@ -83,7 +84,7 @@ class GetJsonActivity : AppCompatActivity() {
 
     }
     //here we will insert the parsed json into the room db:
-    fun insertMoviesToRoom( jsonMovies:List<movie>){
+    fun insertMoviesToRoom( jsonMovies:List<mov>){
         GlobalScope.launch {
         var movieDatabase: MovieDatabase =
                 Room.databaseBuilder(applicationContext,
@@ -116,11 +117,11 @@ class GetJsonActivity : AppCompatActivity() {
 
 }
 //we use this class to parse the json to seperate movies:
-class movie(val title:String,val image:String,val rating:Double,val releaseYear:Int,val genre:List<String>)
+//class movie(val title:String,val image:String,val rating:Double,val releaseYear:Int,val genre:List<String>)
 
-@Entity
+@Entity(tableName = "movie_table")
 data class mov(
-        @PrimaryKey val title: String,
+        @PrimaryKey @ColumnInfo(name="title") val title: String,
         @ColumnInfo val image: String,
         @ColumnInfo val rating: Double,
         @ColumnInfo val releaseYear: Int

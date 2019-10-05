@@ -10,11 +10,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import Tings.com.tings.R
 import Tings.com.tings.SpecificPurchaseActivity
-import Tings.com.tings.firebaseClasses.Payment
+//import Tings.com.tings.firebaseClasses.Payment
+import Tings.com.tings.json.mov
 import Tings.com.tings.room.Movies
 
 
-class RecyclerAdapter(private val myDataset: MutableList<Movies> ) ://Array<String>//
+class RecyclerAdapter(private val myDataset: MutableList<mov> ) ://Array<String>//
         RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
 
     // Provide a reference to the views for each data item
@@ -76,7 +77,7 @@ class RecyclerAdapter(private val myDataset: MutableList<Movies> ) ://Array<Stri
 
         holder.textView.text = myDataset[position].title
         holder.textView2.text = myDataset[position].rating.toString()
-        holder.textView3.text = myDataset[position].relaseYear.toString()
+        holder.textView3.text = myDataset[position].releaseYear.toString()
         holder.textView4.text = myDataset[position].image
 //        holder.textView5.text = myDataset[position].sharedAmount.toString()
 //        holder.textView6.text = myDataset[position].sharing_user_id

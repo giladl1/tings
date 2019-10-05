@@ -14,7 +14,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 import kotlinx.android.synthetic.main.activity_my_purchases.*
 import layout.RecyclerAdapter
-import Tings.com.tings.firebaseClasses.Payment
+//import Tings.com.tings.firebaseClasses.Payment
+import Tings.com.tings.json.mov
 import Tings.com.tings.room.*
 import android.content.*
 import android.os.AsyncTask
@@ -33,6 +34,7 @@ import com.github.kittinunf.fuel.android.extension.responseJson
 
 import android.os.Handler
 import android.os.IBinder
+import kotlinx.android.synthetic.main.activity_get_json.*
 import kotlinx.coroutines.*
 import java.lang.Runnable
 
@@ -45,7 +47,7 @@ class MyPurchasesActivity : AppCompatActivity() {
     private lateinit var dataset: Array<String>
     private lateinit var list : MutableList<String>
     private lateinit var paymentIds : MutableList<String>
-    private lateinit var paymentList : MutableList<Payment>
+//    private lateinit var paymentList : MutableList<Payment>
     lateinit var URL:String
     private lateinit var mHandler: Handler
     private lateinit var mRunnable:Runnable
@@ -62,7 +64,7 @@ class MyPurchasesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_purchases)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(toolbar1)
 
         URL ="http://api.androidhive.info/json/movies.json"
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)
@@ -82,7 +84,7 @@ class MyPurchasesActivity : AppCompatActivity() {
                         MovieDatabase::class.java, "movies")
                         .fallbackToDestructiveMigration().allowMainThreadQueries()
                         .build()
-        var data= mutableListOf<Movies>()
+        var data= mutableListOf<mov>()
 
         GlobalScope.launch {
             //            Movies m
@@ -117,10 +119,6 @@ class MyPurchasesActivity : AppCompatActivity() {
 
 
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
     }
 
     override fun onStart() {
@@ -180,7 +178,7 @@ class MyPurchasesActivity : AppCompatActivity() {
     private fun initDataset() {
 //        dataset = Array(60, {i -> "This is element # $i"})
         list= arrayListOf()
-        paymentList= arrayListOf()
+//        paymentList= arrayListOf()
         paymentIds = arrayListOf()
     }
 //    private val broadcastReceiver = object : BroadcastReceiver() {
@@ -189,7 +187,7 @@ class MyPurchasesActivity : AppCompatActivity() {
 //        }
 //    }
 
-    fun operateAdapter(movies:MutableList<Movies>){
+    fun operateAdapter(movies:MutableList<mov>){
 
         viewManager = LinearLayoutManager(this)
         viewAdapter = RecyclerAdapter(movies)//, paymentIds )//dataset
@@ -280,7 +278,7 @@ class MyPurchasesActivity : AppCompatActivity() {
 class someTask(val context: Context) : AsyncTask<Void, Void, String>() {
 
     var activity: MyPurchasesActivity= MyPurchasesActivity()
-    lateinit var movies:MutableList<Movies>
+    lateinit var movies:MutableList<mov>
 //    lateinit var movieDatabase:MovieDatabase
     fun MyTask(a: MyPurchasesActivity,movieDatabase: MovieDatabase) {
         this.activity = a

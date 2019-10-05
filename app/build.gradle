@@ -47,6 +47,8 @@ dependencies {
     implementation 'com.github.kittinunf.fuel:fuel-android:1.15.1'
 
     implementation 'com.beust:klaxon:5.0.1'
+
+//    implementation 'androidx.lifecycle:lifecycle-*:2.1.0'
     //moshi:
 //    implementation 'com.squareup.moshi:moshi:1.8.0'
 //    implementation("com.squareup.moshi:moshi-kotlin:1.8.0")

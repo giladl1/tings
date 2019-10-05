@@ -1,5 +1,6 @@
 package Tings.com.tings.room
 
+import Tings.com.tings.json.mov
 import android.app.Service
 import android.content.Intent
 import android.os.Binder
@@ -24,8 +25,8 @@ class GetMoviesService : Service() {
                 Locale.US)
         return dateformat.format(Date())
     }
-    fun getMovies(): MutableList<Movies>? = runBlocking{
-        var movies: MutableList<Movies>? = null
+    fun getMovies(): MutableList<mov>? = runBlocking{
+        var movies: MutableList<mov>? = null
 
             var movieDatabase: MovieDatabase? = Room.databaseBuilder(applicationContext,
                     MovieDatabase::class.java, "DATABASE_NAME")
