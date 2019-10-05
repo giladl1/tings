@@ -12,10 +12,11 @@ import Tings.com.tings.R
 import Tings.com.tings.SpecificPurchaseActivity
 //import Tings.com.tings.firebaseClasses.Payment
 import Tings.com.tings.json.mov
+import Tings.com.tings.room.Movie
 import Tings.com.tings.room.Movies
 
 
-class RecyclerAdapter(private val myDataset: MutableList<mov> ) ://Array<String>//
+class RecyclerAdapter(private val myDataset: MutableList<Movie> ) ://Array<String>//
         RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
 
     // Provide a reference to the views for each data item

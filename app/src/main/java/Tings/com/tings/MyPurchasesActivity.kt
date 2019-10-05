@@ -79,17 +79,17 @@ class MyPurchasesActivity : AppCompatActivity() {
 
 
 
-        var movieDatabase:MovieDatabase=
+        var movieDatabase:MovieRoomDatabase=
                 Room.databaseBuilder(this,
-                        MovieDatabase::class.java, "movies")
+                        MovieRoomDatabase::class.java, "movies")
                         .fallbackToDestructiveMigration().allowMainThreadQueries()
                         .build()
-        var data= mutableListOf<mov>()
+        var data= mutableListOf<Movie>()
 
         GlobalScope.launch {
             //            Movies m
 //            movieDatabase.daoAccess().insertOnlySingleMovie()
-            data = movieDatabase.daoAccess().getMovies()
+            data = movieDatabase.movieDao().getAllMovies()
 
             data?.forEach {
                 println(it)
@@ -187,7 +187,7 @@ class MyPurchasesActivity : AppCompatActivity() {
 //        }
 //    }
 
-    fun operateAdapter(movies:MutableList<mov>){
+    fun operateAdapter(movies:MutableList<Movie>){
 
         viewManager = LinearLayoutManager(this)
         viewAdapter = RecyclerAdapter(movies)//, paymentIds )//dataset
@@ -212,12 +212,12 @@ class MyPurchasesActivity : AppCompatActivity() {
 
 
 
-                var movieDatabase: MovieDatabase? = Room.databaseBuilder(applicationContext,
-                        MovieDatabase::class.java, "DATABASE_NAME")
+                var movieDatabase: MovieRoomDatabase? = Room.databaseBuilder(applicationContext,
+                        MovieRoomDatabase::class.java, "DATABASE_NAME")
                         .fallbackToDestructiveMigration()
                         .build()
 
-                val movies = movieDatabase!!.daoAccess().getMovies()
+                val movies = movieDatabase!!.movieDao().getAllMovies()
                 operateAdapter(movies)
             // Schedule the task to repeat after 1 second
 
@@ -278,7 +278,7 @@ class MyPurchasesActivity : AppCompatActivity() {
 class someTask(val context: Context) : AsyncTask<Void, Void, String>() {
 
     var activity: MyPurchasesActivity= MyPurchasesActivity()
-    lateinit var movies:MutableList<mov>
+    lateinit var movies:MutableList<Movie>
 //    lateinit var movieDatabase:MovieDatabase
     fun MyTask(a: MyPurchasesActivity,movieDatabase: MovieDatabase) {
         this.activity = a

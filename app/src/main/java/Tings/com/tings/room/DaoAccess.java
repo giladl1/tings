@@ -23,11 +23,11 @@ public interface DaoAccess {
     @Insert
     void insertMultipleMovies(List<mov> MoviesList);
 
-    @Query("SELECT * FROM  GetJsonActivity. WHERE title = :movieTitle")
-    Movies fetchOneMoviesbyMovieTitle(String movieTitle);
-
-    @Query("SELECT * FROM mov ORDER BY title DESC ")
-    List<mov> getMovies();
+//    @Query("SELECT * FROM  mov WHERE title = :movieTitle")
+//    Movies fetchOneMoviesbyMovieTitle(String movieTitle);
+//
+//    @Query("SELECT * FROM mov ORDER BY title DESC ")
+//    List<mov> getMovies();
 
     @Update
     void updateMovie(mov movies);

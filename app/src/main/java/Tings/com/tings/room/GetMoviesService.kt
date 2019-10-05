@@ -25,15 +25,15 @@ class GetMoviesService : Service() {
                 Locale.US)
         return dateformat.format(Date())
     }
-    fun getMovies(): MutableList<mov>? = runBlocking{
-        var movies: MutableList<mov>? = null
+    fun getMovies(): MutableList<Movie>? = runBlocking{
+        var movies: MutableList<Movie>? = null
 
-            var movieDatabase: MovieDatabase? = Room.databaseBuilder(applicationContext,
-                    MovieDatabase::class.java, "DATABASE_NAME")
+            var movieDatabase: MovieRoomDatabase? = Room.databaseBuilder(applicationContext,
+                    MovieRoomDatabase::class.java, "DATABASE_NAME")
                     .fallbackToDestructiveMigration()
                     .build()
 
-            movies = movieDatabase!!.daoAccess().getMovies()
+            movies = movieDatabase!!.movieDao().getAllMovies()
 
         movies
     }

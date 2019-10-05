@@ -26,7 +26,7 @@ import Tings.com.tings.room.ServiceCallbacks as ServiceCallbacks1
 //const val EXTRA_PARAM2 = "Tings.com.tings.room.extra.PARAM2"
 
 val DATABASE_NAME2: String = "movies"
-private var movieDatabase: MovieDatabase? = null
+private var movieDatabase: MovieRoomDatabase? = null
 
 /**
  * An [IntentService] subclass for handling asynchronous task requests in
@@ -37,9 +37,9 @@ class MySelectService() : IntentService("MySelectService") {
 
     override fun onHandleIntent(intent: Intent?) {
                 movieDatabase = Room.databaseBuilder(applicationContext,
-                        MovieDatabase::class.java, DATABASE_NAME2)
+                        MovieRoomDatabase::class.java, DATABASE_NAME2)
                         .fallbackToDestructiveMigration()
                         .build()
-                val movies = movieDatabase!!.daoAccess().getMovies()//fetchOneMoviesbyMovieTitle("448")
+                val movies = movieDatabase!!.movieDao().getAllMovies()//fetchOneMoviesbyMovieTitle("448")
     }
 }

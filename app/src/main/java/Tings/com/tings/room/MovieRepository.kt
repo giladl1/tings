@@ -8,12 +8,12 @@ class MovieRepository(private val movieDao: MovieDao) {
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    val allMovies: LiveData<List<Movie>> = movieDao.getAllMovies()
+    val allMovies: MutableList<Movie> = movieDao.getAllMovies()
 
 
     // The suspend modifier tells the compiler that this must be called from a
     // coroutine or another suspend function.
-    suspend fun insert(movie: Movie) {
-        movieDao.insert(movie)
-    }
+//    suspend fun insert(movie: Movie) {
+//        movieDao.insert(movie)
+//    }
 }

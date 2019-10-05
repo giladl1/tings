@@ -12,7 +12,7 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
     // The ViewModel maintains a reference to the repository to get data.
     private val repository: MovieRepository
     // LiveData gives us updated movies when they change.
-    val allMovies: LiveData<List<Movie>>
+    val allMovies: MutableList<Movie>
     val viewModelScope=GlobalScope
 
     init {
@@ -28,6 +28,6 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
     // coroutine. ViewModels have a coroutine scope based on their lifecycle called
     // viewModelScope which we can use here.
     fun insert(movie: Movie) = viewModelScope.launch {//
-        repository.insert(movie)
+//        repository.insert(movie)
     }
 }

@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
-//apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -48,6 +48,7 @@ dependencies {
 
     implementation 'com.beust:klaxon:5.0.1'
 
+    kapt "android.arch.persistence.room:compiler:1.1.1"
 //    implementation 'androidx.lifecycle:lifecycle-*:2.1.0'
     //moshi:
 //    implementation 'com.squareup.moshi:moshi:1.8.0'

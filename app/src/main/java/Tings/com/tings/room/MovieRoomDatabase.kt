@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 // Annotates class to be a Room Database with a table (entity) of the Movie class
-@Database(entities = arrayOf(Movie::class), version = 1)
+@Database(entities = arrayOf(Movie::class), version = 2)
 public abstract class MovieRoomDatabase : RoomDatabase() {
 
     abstract fun movieDao(): MovieDao
@@ -29,7 +29,7 @@ public abstract class MovieRoomDatabase : RoomDatabase() {
 
         suspend fun populateDatabase(movieDao: MovieDao) {
             // Delete all content here.
-            movieDao.deleteAll()
+//            movieDao.deleteAll()
 
             // Add sample movies.
 //            var movie = Movie("Hello")

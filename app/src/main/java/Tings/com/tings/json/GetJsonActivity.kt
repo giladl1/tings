@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity;
 import Tings.com.tings.R
 import Tings.com.tings.room.MovieDatabase
+import Tings.com.tings.room.MovieRoomDatabase
 import Tings.com.tings.room.Movies
 import android.graphics.Movie
 import android.util.Log
@@ -85,10 +86,10 @@ class GetJsonActivity : AppCompatActivity() {
     }
     //here we will insert the parsed json into the room db:
     fun insertMoviesToRoom( jsonMovies:List<mov>){
-        GlobalScope.launch {
-        var movieDatabase: MovieDatabase =
+//        GlobalScope.launch {
+        var movieDatabase: MovieRoomDatabase =
                 Room.databaseBuilder(applicationContext,
-                        MovieDatabase::class.java, "movies")
+                        MovieRoomDatabase::class.java, "movies")
                         .fallbackToDestructiveMigration().allowMainThreadQueries()
                         .build()
         Log.v("insertMoviesToRoom","passed")
@@ -98,7 +99,7 @@ class GetJsonActivity : AppCompatActivity() {
             jsonMovies?.forEach {
                 Log.v("before println it","passed")
 //                println(it)
-                var myMovie= mov(it.title,it.image,it.rating,it.releaseYear)//Movies()
+                var myMovie= Tings.com.tings.room.Movie(it.title,it.image,it.rating,it.releaseYear)//Movies()
                 Log.v("before it title","passed")
 //                myMovie.setTitle(it.title)
 //                Log.v("before it image","passed")
@@ -106,12 +107,12 @@ class GetJsonActivity : AppCompatActivity() {
 //                Log.v("before it rating","passed")
 //                myMovie.setRating(it.rating)
 //                myMovie.setRelaseYear(it.releaseYear)
+                movieDatabase.movieDao().insertOnlySingleMovie(myMovie)//todo one movie here
 
-                movieDatabase.daoAccess().insertOnlySingleMovie(myMovie)//todo one movie here
                 Log.v("insertToRoom",it.title)
 //                insertGenresToRoom(title,List<Genres>)
                 }
-        }
+//        }
 
     }
 
