@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import Tings.com.tings.R
 import Tings.com.tings.SpecificPurchaseActivity
 //import Tings.com.tings.firebaseClasses.Payment
-import Tings.com.tings.json.mov
 import Tings.com.tings.room.Movie
-import Tings.com.tings.room.Movies
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.recyclerview_item_row2.view.*
 
 
 class RecyclerAdapter(private val myDataset: MutableList<Movie> ) ://Array<String>//
@@ -24,35 +25,34 @@ class RecyclerAdapter(private val myDataset: MutableList<Movie> ) ://Array<Strin
     // you provide access to all the views for a data item in a view holder.
     // Each data item is just a string in this case that is shown in a TextView.
     class MyViewHolder(val v: View,val context: Context) : RecyclerView.ViewHolder(v) {
-        val textView: TextView
-        val textView2: TextView
-        val textView3: TextView
-        val textView4: TextView
-        val textView5: TextView
-        val textView6: TextView
-//        val textView7: TextView
+        val textViewTitle: TextView
+        val textViewRating: TextView
+        val textViewReleaseYear: TextView
+        val textViewGenres: TextView
+        val textViewImage: TextView//to save the url link to the image
+        val imageView : ImageView
 
         init {
             // Define click listener for the ViewHolder's View.
-            textView = v.findViewById(R.id.textView)
-            textView2 = v.findViewById(R.id.textView2)
-            textView3 = v.findViewById(R.id.textView3)
-            textView4 = v.findViewById(R.id.textView4)
-            textView5 = v.findViewById(R.id.textView5)
-            textView6 = v.findViewById(R.id.textView6)
-//            textView7 = v.findViewById(R.id.textView7)
+            textViewTitle = v.findViewById(R.id.titleTextView)
+            textViewRating = v.findViewById(R.id.ratingTextView)
+            textViewReleaseYear = v.findViewById(R.id.releaseYearTextView)
+            textViewGenres = v.findViewById(R.id.genresTextview)
+            textViewImage= v.findViewById(R.id.textViewImage)
+            imageView=v.findViewById(R.id.imageView)
+
+//            textView5 = v.findViewById(R.id.textView5)
+//            textView6 = v.findViewById(R.id.textView6)
             v.setOnClickListener {
                 Log.d("RecyclerAdapter", "Element $adapterPosition clicked.")
                 val intent = Intent(context, SpecificPurchaseActivity::class.java)
-                intent.putExtra("title",textView.text)//textViewNotVisible.text)
-                intent.putExtra("image",textView4.text)
-                intent.putExtra("rating",textView2.text)
-                intent.putExtra("releaseYear",textView3.text)
+                intent.putExtra("title",textViewTitle.text)
+                intent.putExtra("image",v.textViewImage.text)//the url link
+                intent.putExtra("rating",textViewRating.text)
+                intent.putExtra("releaseYear",textViewReleaseYear.text)
+                intent.putExtra("genre0",textViewGenres.text)
 
-                intent.putExtra("genre0",textView2.text)
-                intent.putExtra("genre1",textView3.text)
-                intent.putExtra("genre2",textView3.text)//not set yet
-//                intent.putExtra("status",textView7.text)
+//                intent.putExtra("image",textView4.text)
 
                 context.startActivity(intent)
 
@@ -65,7 +65,7 @@ class RecyclerAdapter(private val myDataset: MutableList<Movie> ) ://Array<Strin
         // create a new view //textView
 
         val textView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.recyclerview_item_row, parent, false) //as TextView
+                .inflate(R.layout.recyclerview_item_row2, parent, false) //as TextView
         // set the view's size, margins, paddings and layout parameters
 
         return MyViewHolder(textView,parent.context)//,myDatasetIds
@@ -76,17 +76,21 @@ class RecyclerAdapter(private val myDataset: MutableList<Movie> ) ://Array<Strin
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
-        holder.textView.text = myDataset[position].title
-        holder.textView2.text = myDataset[position].rating.toString()
-        holder.textView3.text = myDataset[position].releaseYear.toString()
-        holder.textView4.text = myDataset[position].image
-//        holder.textView5.text = myDataset[position].sharedAmount.toString()
-//        holder.textView6.text = myDataset[position].sharing_user_id
-//        holder.textView7.text = myDataset[position].status
+        holder.textViewTitle.text = myDataset[position].title
+        holder.textViewRating.text = myDataset[position].rating.toString()
+        holder.textViewReleaseYear.text = myDataset[position].releaseYear.toString()
+//        holder.textViewGenres.text=myDataset[position].
+        holder.textViewImage.text = myDataset[position].image
 
+
+        Glide.with(holder.context)
+                .load(myDataset[position].image)
+                .into(holder.imageView)
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = myDataset.size
+
 }
+
 

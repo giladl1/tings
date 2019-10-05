@@ -204,6 +204,8 @@ class MyPurchasesActivity : AppCompatActivity() {
             adapter = viewAdapter
 
         }
+
+
     }
 
 
