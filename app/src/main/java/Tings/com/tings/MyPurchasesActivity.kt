@@ -111,8 +111,8 @@ class MyPurchasesActivity : AppCompatActivity() {
 //        mHandler = Handler()
 
 
-        val intent = Intent(this, MyInsertService::class.java)
-        startService(intent)
+//        val intent = Intent(this, MyInsertService::class.java)
+//        startService(intent)
 
 //        insertMovieToRoom()
 //        getMovieFromRoom()
@@ -282,12 +282,6 @@ class someTask(val context: Context) : AsyncTask<Void, Void, String>() {
     var activity: MyPurchasesActivity= MyPurchasesActivity()
     lateinit var movies:MutableList<Movie>
 //    lateinit var movieDatabase:MovieDatabase
-    fun MyTask(a: MyPurchasesActivity,movieDatabase: MovieDatabase) {
-        this.activity = a
-
-//        this.movieDatabase=movieDatabase
-
-    }
     override fun doInBackground(vararg params: Void?): String? {
 
 //        var movieDatabase:MovieDatabase =

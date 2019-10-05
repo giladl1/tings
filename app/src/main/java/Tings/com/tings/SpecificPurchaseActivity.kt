@@ -5,7 +5,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_get_json.*
+//import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_specific_movie.*
 import kotlinx.android.synthetic.main.recyclerview_item_row2.*
 
@@ -15,7 +16,7 @@ class SpecificPurchaseActivity : AppCompatActivity() {
         setContentView(R.layout.activity_specific_movie)
 
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(toolbar1)
         var title:String= intent.getStringExtra("title")
         val image:String = intent.getStringExtra("image")
         val rating:String = intent.getStringExtra("rating")

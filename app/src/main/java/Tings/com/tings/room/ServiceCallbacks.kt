@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import layout.RecyclerAdapter
 
 interface ServiceCallbacks {
-    fun operateAdapter( movies:MutableList<Movies>)
+    fun operateAdapter( movies:MutableList<Movie>)
 
 
 }

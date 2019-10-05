@@ -1,12 +1,9 @@
 package Tings.com.tings.json
-import android.Manifest
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity;
 import Tings.com.tings.R
-import Tings.com.tings.room.MovieDatabase
 import Tings.com.tings.room.MovieRoomDatabase
-import Tings.com.tings.room.Movies
-import android.graphics.Movie
+//import Tings.com.tings.room.Movies
 import android.util.Log
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -17,9 +14,6 @@ import com.beust.klaxon.Klaxon
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.android.extension.responseJson
 import kotlinx.android.synthetic.main.activity_get_json.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.io.StringReader
 
 class GetJsonActivity : AppCompatActivity() {
@@ -27,7 +21,7 @@ class GetJsonActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_get_json)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(toolbar1)
         URL ="http://api.androidhive.info/json/movies.json"
         getJsonFromUrl()
 
@@ -79,7 +73,7 @@ class GetJsonActivity : AppCompatActivity() {
 //        println("rasa is : "+result?.rating.toString())
 
 
-        var data= mutableListOf<Movies>()//todo transform from json to room
+//        var data= mutableListOf<Movies>()//todo transform from json to room
 
 //        println("res is: " + (result?.get(0)?.image ))
 
