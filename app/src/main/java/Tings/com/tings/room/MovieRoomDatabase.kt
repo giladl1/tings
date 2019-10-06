@@ -22,23 +22,22 @@ public abstract class MovieRoomDatabase : RoomDatabase() {
             super.onOpen(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    populateDatabase(database.movieDao())
                 }
             }
         }
 
-        suspend fun populateDatabase(movieDao: MovieDao) {
-            // Delete all content here.
-//            movieDao.deleteAll()
-
-            // Add sample movies.
-//            var movie = Movie("Hello")
-//            movieDao.insert(movie)
-//            movie = Movie("World!")
-//            movieDao.insert(movie)
-
-            // TODO: Add your own movies!
-        }
+//        suspend fun populateDatabase(movieDao: MovieDao) {
+//            // Delete all content here.
+////            movieDao.deleteAll()
+//
+//            // Add sample movies.
+////            var movie = Movie("Hello")
+////            movieDao.insert(movie)
+////            movie = Movie("World!")
+////            movieDao.insert(movie)
+//
+//            // TODO: Add your own movies!
+//        }
     }
     
     companion object {
