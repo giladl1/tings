@@ -13,8 +13,10 @@ interface MovieDao {
     @Query("SELECT * from movie_table ORDER BY title ASC")
     fun getAllMovies():  MutableList<Movie>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun insertOnlySingleMovie(myMov: Movie)
+
+
 
 //    @Insert(onConflict = OnConflictStrategy.IGNORE)
 //    abstract fun insert(movie: Movie)

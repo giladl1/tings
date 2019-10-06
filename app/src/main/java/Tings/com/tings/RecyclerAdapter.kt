@@ -9,7 +9,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import Tings.com.tings.R
-import Tings.com.tings.SpecificPurchaseActivity
+import Tings.com.tings.SpecificMovieActivity
+import Tings.com.tings.json.mov
 //import Tings.com.tings.firebaseClasses.Payment
 import Tings.com.tings.room.Movie
 import android.widget.ImageView
@@ -17,7 +18,7 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.recyclerview_item_row2.view.*
 
 
-class RecyclerAdapter(private val myDataset: MutableList<Movie> ) ://Array<String>//
+class RecyclerAdapter(private val myDataset: MutableList<mov> ) ://Array<String>//
         RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
 
     // Provide a reference to the views for each data item
@@ -45,12 +46,12 @@ class RecyclerAdapter(private val myDataset: MutableList<Movie> ) ://Array<Strin
 //            textView6 = v.findViewById(R.id.textView6)
             v.setOnClickListener {
                 Log.d("RecyclerAdapter", "Element $adapterPosition clicked.")
-                val intent = Intent(context, SpecificPurchaseActivity::class.java)
+                val intent = Intent(context, SpecificMovieActivity::class.java)
                 intent.putExtra("title",textViewTitle.text)
                 intent.putExtra("image",v.textViewImage.text)//the url link
                 intent.putExtra("rating",textViewRating.text)
                 intent.putExtra("releaseYear",textViewReleaseYear.text)
-                intent.putExtra("genre0",textViewGenres.text)
+                intent.putExtra("genres",textViewGenres.text)
 
 //                intent.putExtra("image",textView4.text)
 
@@ -79,13 +80,21 @@ class RecyclerAdapter(private val myDataset: MutableList<Movie> ) ://Array<Strin
         holder.textViewTitle.text = myDataset[position].title
         holder.textViewRating.text = myDataset[position].rating.toString()
         holder.textViewReleaseYear.text = myDataset[position].releaseYear.toString()
-//        holder.textViewGenres.text=myDataset[position].
+        holder.textViewGenres.text=getGenresInString( myDataset[position].genre)
         holder.textViewImage.text = myDataset[position].image
 
 
         Glide.with(holder.context)
                 .load(myDataset[position].image)
                 .into(holder.imageView)
+    }
+
+    private fun getGenresInString(genre: MutableList<String>): CharSequence? {
+        var result:String=""
+        genre.forEach{
+            result=result+it+" | "
+        }
+        return result
     }
 
     // Return the size of your dataset (invoked by the layout manager)

@@ -13,49 +13,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-        <activity
             android:name=".json.GetJsonActivity"
             android:label="@string/title_activity_get_json"
-            android:theme="@style/AppTheme.NoActionBar">
-
-
-        </activity>
-
-        <service
-            android:name=".room.GetMoviesService"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name=".room.MySelectService"
-            android:exported="false" />
-        <service
-            android:name=".room.MyInsertService"
-            android:exported="false" />
-
-        <activity
-            android:name=".SpecificPurchaseActivity"
-            android:label="@string/title_activity_specific_purchase"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-        <activity
-            android:name=".MyPurchasesActivity"
-            android:label="@string/title_activity_my_purchases"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <service
+            android:name=".room.GetMoviesService"
+            android:enabled="true"
+            android:exported="true" />
+        <activity
+            android:name=".SpecificMovieActivity"
+            android:label="@string/title_activity_specific_purchase"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".MyMoviesActivity"
+            android:label="@string/title_activity_my_purchases"
+            android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
     </application>
 

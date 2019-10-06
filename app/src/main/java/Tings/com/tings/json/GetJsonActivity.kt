@@ -1,9 +1,12 @@
 package Tings.com.tings.json
+import Tings.com.tings.MyMoviesActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity;
 import Tings.com.tings.R
+import Tings.com.tings.SpecificMovieActivity
+import Tings.com.tings.room.Genre
 import Tings.com.tings.room.MovieRoomDatabase
-//import Tings.com.tings.room.Movies
+import android.content.Intent
 import android.util.Log
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -88,26 +91,27 @@ class GetJsonActivity : AppCompatActivity() {
                         .build()
         Log.v("insertMoviesToRoom","passed")
 
-//            movieDatabase.daoAccess().getMovies()
 
             jsonMovies?.forEach {
                 Log.v("before println it","passed")
 //                println(it)
                 var myMovie= Tings.com.tings.room.Movie(it.title,it.image,it.rating,it.releaseYear)//Movies()
                 Log.v("before it title","passed")
-//                myMovie.setTitle(it.title)
-//                Log.v("before it image","passed")
-//                myMovie.setImage(it.image)
-//                Log.v("before it rating","passed")
-//                myMovie.setRating(it.rating)
-//                myMovie.setRelaseYear(it.releaseYear)
+
+                var myGenres=it.genre
+                myGenres?.forEachIndexed{index,it_g->
+                    var singleGenre=Tings.com.tings.room.Genre(myMovie.title,index,it_g)
+                    movieDatabase.genreDao().insertSingleGenre(singleGenre)
+                }
+
                 movieDatabase.movieDao().insertOnlySingleMovie(myMovie)//todo one movie here
 
                 Log.v("insertToRoom",it.title)
 //                insertGenresToRoom(title,List<Genres>)
                 }
 //        }
-
+        val intent = Intent(this, MyMoviesActivity::class.java)
+        startActivity(intent)
     }
 
 }
@@ -119,6 +123,7 @@ data class mov(
         @PrimaryKey @ColumnInfo(name="title") val title: String,
         @ColumnInfo val image: String,
         @ColumnInfo val rating: Double,
-        @ColumnInfo val releaseYear: Int
+        @ColumnInfo val releaseYear: Int,
+        @ColumnInfo val genre: MutableList<String>
 )
 

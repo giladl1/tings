@@ -1,9 +1,9 @@
 package Tings.com.tings
 
+import Tings.com.tings.json.mov
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -12,38 +12,22 @@ import androidx.recyclerview.widget.RecyclerView
 
 import layout.RecyclerAdapter
 import Tings.com.tings.room.*
-import android.content.*
-import android.os.AsyncTask
 import androidx.room.Room
-import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.android.extension.responseJson
 
-import android.os.Handler
-import android.os.IBinder
 import kotlinx.android.synthetic.main.activity_get_json.*
 import kotlinx.coroutines.*
-import java.lang.Runnable
 
 
-class MyPurchasesActivity : AppCompatActivity() {
+class MyMoviesActivity : AppCompatActivity() {
     val MY_PERMISSIONS_REQUEST_INTERNET=1
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
-//    private lateinit var dataset: Array<String>
-//    private lateinit var list : MutableList<String>
-//    private lateinit var paymentIds : MutableList<String>
-//    private lateinit var paymentList : MutableList<Payment>
     lateinit var URL:String
-//    private lateinit var mHandler: Handler
-//    private lateinit var mRunnable:Runnable
-
-//    var myService: GetMoviesService? = null
-//    var isBound = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_purchases)
+        setContentView(R.layout.activity_my_movies)
         setSupportActionBar(toolbar1)
 
         URL ="http://api.androidhive.info/json/movies.json"
@@ -62,22 +46,36 @@ class MyPurchasesActivity : AppCompatActivity() {
         var data= mutableListOf<Movie>()
 
         GlobalScope.launch {
-            //            Movies m
-            data = movieDatabase.movieDao().getAllMovies()
-
-            data?.forEach {
-                println(it)
+            // we'll get the movies and genres and then transform them into mov class for the adapter
+            data = movieDatabase.movieDao().getAllMovies()//getting all movies from room db
+            var dataWithGenres:MutableList<mov> = arrayListOf()
+            data?.forEachIndexed { index, movie ->
+                //list of Genres for current movie
+                var curMovieGenresList=movieDatabase.genreDao().getGenres(movie.title)
+                //list of Genres as strings for current movie
+                var genresStrings:MutableList<String> = getGenresStrings(curMovieGenresList)
+                //mov with genres as a list of strings
+                var movWithGenre:mov=mov(movie.title,movie.image,movie.rating,movie.releaseYear,genresStrings)
+                //list of movs-we add current mov to it
+                dataWithGenres.add(index,movWithGenre)
+                println(movie)
             }
-            operateAdapter( data)
+            operateAdapter( dataWithGenres)//data
         }
-//        sampleKo()
 
+        }
+
+
+    private fun getGenresStrings(myGenres:MutableList<Genre>): MutableList<String> {
+        var currentGenresStrings: MutableList<String> = arrayListOf()
+        myGenres?.forEachIndexed { index, genre ->
+
+                currentGenresStrings.add(index, myGenres[index].genre)
+
+        }
+        return currentGenresStrings
     }
 
-    override fun onStart() {
-        super.onStart()
-
-    }
     fun askPermission(){
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(this,
@@ -104,10 +102,11 @@ class MyPurchasesActivity : AppCompatActivity() {
         } else {
             // Permission has already been granted
         }
-
     }
-
-    fun operateAdapter(movies:MutableList<Movie>){
+    /***************************************************************
+    //here the recycler adapter is attached to the data and activity:
+    **************************************************************/
+    fun operateAdapter(movies:MutableList<mov>){
 
         viewManager = LinearLayoutManager(this)
         viewAdapter = RecyclerAdapter(movies)//, paymentIds )//dataset
@@ -125,37 +124,6 @@ class MyPurchasesActivity : AppCompatActivity() {
 
         }
     }
-//    private fun sampleKo() {
-//        try {
-//
-//            Fuel.post(URL, listOf()).responseJson { request, response, result ->
-//                Log.d("plzzzzz", result.get().content)
-////                onTaskCompleted(result.get().content)
-//            }
-//        } catch (e: Exception) {
-//
-//        } finally {
-//
-//        }
-//    }
-
-//    private val myConnection = object : ServiceConnection {
-//        override fun onServiceConnected(className: ComponentName,
-//                                        service: IBinder) {
-//            val binder = service as GetMoviesService.MyLocalBinder
-//            myService = binder.getService()
-//            isBound = true
-//            val currentTime = myService?.getCurrentTime()
-//            val movies =myService?.getMovies()
-//        }
-//
-//        override fun onServiceDisconnected(name: ComponentName) {
-//            isBound = false
-//        }
-//    }
-
-
-
 }
 
 
